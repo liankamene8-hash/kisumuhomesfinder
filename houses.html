@@ -1,0 +1,909 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Find Houses | KisumuHomes</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+</head>
+
+<body>
+
+<!-- ================= NAVIGATION ================= -->
+
+<header class="navbar">
+
+    <div class="logo">
+        <span>🏠</span>
+        Kisumu<span>Homes</span>
+    </div>
+
+    <nav id="navMenu">
+
+        <a href="index.html">Home</a>
+
+        <a href="houses.html" class="active-link">
+            Find Houses
+        </a>
+
+        <a href="index.html#locations">
+            Locations
+        </a>
+
+        <a href="index.html#about">
+            About
+        </a>
+
+    </nav>
+
+    <div class="nav-buttons">
+
+        <button class="login-btn">
+            Login
+        </button>
+
+        <button
+            class="post-btn"
+            onclick="postHouse()"
+        >
+            + Post House
+        </button>
+
+    </div>
+
+    <button
+        class="menu-btn"
+        onclick="toggleMenu()"
+    >
+        ☰
+    </button>
+
+</header>
+
+
+<!-- ================= PAGE HEADER ================= -->
+
+<section class="listing-header">
+
+    <div>
+
+        <p class="section-label">
+            KISUMU PROPERTY MARKET
+        </p>
+
+        <h1>
+            Find your next home
+        </h1>
+
+        <p>
+            Browse houses and apartments available
+            for rent across Kisumu.
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- ================= SEARCH & FILTER ================= -->
+
+<section class="listing-area">
+
+    <aside class="filters">
+
+        <div class="filter-title">
+
+            <h3>Filter houses</h3>
+
+            <button onclick="clearFilters()">
+                Clear
+            </button>
+
+        </div>
+
+
+        <!-- LOCATION -->
+
+        <div class="filter-group">
+
+            <label>
+                Location
+            </label>
+
+            <select id="filterLocation">
+
+                <option value="all">
+                    All locations
+                </option>
+
+                <option value="milimani">
+                    Milimani
+                </option>
+
+                <option value="mamboleo">
+                    Mamboleo
+                </option>
+
+                <option value="nyamasaria">
+                    Nyamasaria
+                </option>
+
+                <option value="kondele">
+                    Kondele
+                </option>
+
+                <option value="manyatta">
+                    Manyatta
+                </option>
+
+                <option value="lolwe">
+                    Lolwe
+                </option>
+
+                <option value="riat">
+                    Riat Hills
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <!-- HOUSE TYPE -->
+
+        <div class="filter-group">
+
+            <label>
+                House type
+            </label>
+
+            <select id="filterType">
+
+                <option value="all">
+                    All types
+                </option>
+
+                <option value="single">
+                    Single Room
+                </option>
+
+                <option value="bedsitter">
+                    Bedsitter
+                </option>
+
+                <option value="one">
+                    1 Bedroom
+                </option>
+
+                <option value="two">
+                    2 Bedroom
+                </option>
+
+                <option value="three">
+                    3 Bedroom
+                </option>
+
+                <option value="four">
+                    4 Bedroom
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <!-- PRICE -->
+
+        <div class="filter-group">
+
+            <label>
+                Maximum rent
+            </label>
+
+            <select id="filterPrice">
+
+                <option value="all">
+                    Any price
+                </option>
+
+                <option value="5000">
+                    KSh 5,000
+                </option>
+
+                <option value="10000">
+                    KSh 10,000
+                </option>
+
+                <option value="15000">
+                    KSh 15,000
+                </option>
+
+                <option value="20000">
+                    KSh 20,000
+                </option>
+
+                <option value="30000">
+                    KSh 30,000
+                </option>
+
+                <option value="50000">
+                    KSh 50,000
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <button
+            class="apply-filter"
+            onclick="filterHouses()"
+        >
+            Search Houses
+        </button>
+
+
+        <!-- POST CTA -->
+
+        <div class="filter-post">
+
+            <span>🏠</span>
+
+            <h4>
+                Have a house to rent?
+            </h4>
+
+            <p>
+                List your property and reach
+                people searching for homes.
+            </p>
+
+            <button onclick="postHouse()">
+                Post a House
+            </button>
+
+        </div>
+
+    </aside>
+
+
+    <!-- ================= LISTINGS ================= -->
+
+    <main class="listings">
+
+        <div class="listing-toolbar">
+
+            <div>
+                <h2>Available Houses</h2>
+                <p id="resultCount">Loading houses...</p>
+            </div>
+
+            <div class="sort-box">
+
+                <label for="sortListings">
+                    Sort by:
+                </label>
+
+                <select id="sortListings"
+                        onchange="sortListings()">
+
+                    <option value="newest">
+                        Newest
+                    </option>
+
+                    <option value="low">
+                        Price: Low to High
+                    </option>
+
+                    <option value="high">
+                        Price: High to Low
+                    </option>
+
+                </select>
+
+            </div>
+
+        </div>
+
+
+        <div class="listing-grid">
+            <!-- JavaScript will create the houses here -->
+
+
+            <!-- HOUSE 1 -->
+
+            <article
+                class="property-card"
+                data-location="mamboleo"
+                data-type="two"
+                data-price="18000"
+            >
+
+                <div class="property-image property1">
+
+                    <span class="property-status">
+                        Available
+                    </span>
+
+                    <button
+                        class="property-heart"
+                        onclick="toggleFavorite(this)"
+                    >
+                        ♡
+                    </button>
+
+                </div>
+
+
+                <div class="property-content">
+
+                    <p class="property-location">
+                        📍 Mamboleo, Kisumu
+                    </p>
+
+                    <h3>
+                        Modern 2 Bedroom Apartment
+                    </h3>
+
+                    <div class="property-features">
+
+                        <span>
+                            🛏 2 Beds
+                        </span>
+
+                        <span>
+                            🚿 2 Baths
+                        </span>
+
+                        <span>
+                            🅿️ Parking
+                        </span>
+
+                    </div>
+
+
+                    <div class="property-footer">
+
+                        <div>
+
+                            <strong>
+                                KSh 18,000
+                            </strong>
+
+                            <small>
+                                /month
+                            </small>
+
+                        </div>
+
+                        <button
+                            onclick="openProperty(
+                                'Modern 2 Bedroom Apartment',
+                                'Mamboleo',
+                                '18,000'
+                            )"
+                        >
+                            Details
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+
+            <!-- HOUSE 2 -->
+
+            <article
+                class="property-card"
+                data-location="nyamasaria"
+                data-type="one"
+                data-price="10000"
+            >
+
+                <div class="property-image property2">
+
+                    <span class="property-status">
+                        Available
+                    </span>
+
+                    <button
+                        class="property-heart"
+                        onclick="toggleFavorite(this)"
+                    >
+                        ♡
+                    </button>
+
+                </div>
+
+
+                <div class="property-content">
+
+                    <p class="property-location">
+                        📍 Nyamasaria, Kisumu
+                    </p>
+
+                    <h3>
+                        Affordable 1 Bedroom House
+                    </h3>
+
+                    <div class="property-features">
+
+                        <span>
+                            🛏 1 Bed
+                        </span>
+
+                        <span>
+                            🚿 1 Bath
+                        </span>
+
+                        <span>
+                            🅿️ Parking
+                        </span>
+
+                    </div>
+
+
+                    <div class="property-footer">
+
+                        <div>
+
+                            <strong>
+                                KSh 10,000
+                            </strong>
+
+                            <small>
+                                /month
+                            </small>
+
+                        </div>
+
+                        <button
+                            onclick="openProperty(
+                                'Affordable 1 Bedroom House',
+                                'Nyamasaria',
+                                '10,000'
+                            )"
+                        >
+                            Details
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+
+            <!-- HOUSE 3 -->
+
+            <article
+                class="property-card"
+                data-location="milimani"
+                data-type="three"
+                data-price="45000"
+            >
+
+                <div class="property-image property3">
+
+                    <span class="property-status">
+                        Available
+                    </span>
+
+                    <button
+                        class="property-heart"
+                        onclick="toggleFavorite(this)"
+                    >
+                        ♡
+                    </button>
+
+                </div>
+
+
+                <div class="property-content">
+
+                    <p class="property-location">
+                        📍 Milimani, Kisumu
+                    </p>
+
+                    <h3>
+                        Luxury 3 Bedroom Home
+                    </h3>
+
+                    <div class="property-features">
+
+                        <span>
+                            🛏 3 Beds
+                        </span>
+
+                        <span>
+                            🚿 3 Baths
+                        </span>
+
+                        <span>
+                            🅿️ Parking
+                        </span>
+
+                    </div>
+
+
+                    <div class="property-footer">
+
+                        <div>
+
+                            <strong>
+                                KSh 45,000
+                            </strong>
+
+                            <small>
+                                /month
+                            </small>
+
+                        </div>
+
+                        <button
+                            onclick="openProperty(
+                                'Luxury 3 Bedroom Home',
+                                'Milimani',
+                                '45,000'
+                            )"
+                        >
+                            Details
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+
+            <!-- HOUSE 4 -->
+
+            <article
+                class="property-card"
+                data-location="kondele"
+                data-type="bedsitter"
+                data-price="7500"
+            >
+
+                <div class="property-image property4">
+
+                    <span class="property-status">
+                        Available
+                    </span>
+
+                    <button
+                        class="property-heart"
+                        onclick="toggleFavorite(this)"
+                    >
+                        ♡
+                    </button>
+
+                </div>
+
+
+                <div class="property-content">
+
+                    <p class="property-location">
+                        📍 Kondele, Kisumu
+                    </p>
+
+                    <h3>
+                        Clean Modern Bedsitter
+                    </h3>
+
+                    <div class="property-features">
+
+                        <span>
+                            🛏 Bedsitter
+                        </span>
+
+                        <span>
+                            🚿 1 Bath
+                        </span>
+
+                        <span>
+                            💧 Water
+                        </span>
+
+                    </div>
+
+
+                    <div class="property-footer">
+
+                        <div>
+
+                            <strong>
+                                KSh 7,500
+                            </strong>
+
+                            <small>
+                                /month
+                            </small>
+
+                        </div>
+
+                        <button
+                            onclick="openProperty(
+                                'Clean Modern Bedsitter',
+                                'Kondele',
+                                '7,500'
+                            )"
+                        >
+                            Details
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+
+            <!-- HOUSE 5 -->
+
+            <article
+                class="property-card"
+                data-location="manyatta"
+                data-type="two"
+                data-price="15000"
+            >
+
+                <div class="property-image property5">
+
+                    <span class="property-status">
+                        Available
+                    </span>
+
+                    <button
+                        class="property-heart"
+                        onclick="toggleFavorite(this)"
+                    >
+                        ♡
+                    </button>
+
+                </div>
+
+
+                <div class="property-content">
+
+                    <p class="property-location">
+                        📍 Manyatta, Kisumu
+                    </p>
+
+                    <h3>
+                        Spacious 2 Bedroom House
+                    </h3>
+
+                    <div class="property-features">
+
+                        <span>
+                            🛏 2 Beds
+                        </span>
+
+                        <span>
+                            🚿 2 Baths
+                        </span>
+
+                        <span>
+                            🅿️ Parking
+                        </span>
+
+                    </div>
+
+
+                    <div class="property-footer">
+
+                        <div>
+
+                            <strong>
+                                KSh 15,000
+                            </strong>
+
+                            <small>
+                                /month
+                            </small>
+
+                        </div>
+
+                        <button
+                            onclick="openProperty(
+                                'Spacious 2 Bedroom House',
+                                'Manyatta',
+                                '15,000'
+                            )"
+                        >
+                            Details
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+
+            <!-- HOUSE 6 -->
+
+            <article
+                class="property-card"
+                data-location="lolwe"
+                data-type="four"
+                data-price="35000"
+            >
+
+                <div class="property-image property6">
+
+                    <span class="property-status">
+                        Available
+                    </span>
+
+                    <button
+                        class="property-heart"
+                        onclick="toggleFavorite(this)"
+                    >
+                        ♡
+                    </button>
+
+                </div>
+
+
+                <div class="property-content">
+
+                    <p class="property-location">
+                        📍 Lolwe, Kisumu
+                    </p>
+
+                    <h3>
+                        Large 4 Bedroom Family Home
+                    </h3>
+
+                    <div class="property-features">
+
+                        <span>
+                            🛏 4 Beds
+                        </span>
+
+                        <span>
+                            🚿 3 Baths
+                        </span>
+
+                        <span>
+                            🅿️ Garage
+                        </span>
+
+                    </div>
+
+
+                    <div class="property-footer">
+
+                        <div>
+
+                            <strong>
+                                KSh 35,000
+                            </strong>
+
+                            <small>
+                                /month
+                            </small>
+
+                        </div>
+
+                        <button
+                            onclick="openProperty(
+                                'Large 4 Bedroom Family Home',
+                                'Lolwe',
+                                '35,000'
+                            )"
+                        >
+                            Details
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+        </div>
+
+
+        <!-- NO RESULTS -->
+
+        <div
+            id="noResults"
+            class="no-results"
+        >
+
+            <div>
+                🔎
+            </div>
+
+            <h3>
+                No houses found
+            </h3>
+
+            <p>
+                Try changing your search filters.
+            </p>
+
+        </div>
+
+    </main>
+
+</section>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+    <div class="footer-logo">
+        🏠 KisumuHomes
+    </div>
+
+    <p>
+        Find your next home in Kisumu.
+    </p>
+
+    <div class="footer-contact">
+        <strong>Founded by Stephen</strong>
+        <a href="mailto:ongerastephene@gmail.com">
+            ongerastephene@gmail.com
+        </a>
+        <a href="tel:+254742636064">
+            Helpline: +254742636064
+        </a>
+    </div>
+
+    <div class="footer-links">
+
+        <a href="index.html">
+            Home
+        </a>
+
+        <a href="houses.html">
+            Find Houses
+        </a>
+
+        <a href="index.html#locations">
+            Locations
+        </a>
+
+        <a href="index.html#about">
+            About
+        </a>
+
+        <a href="https://github.com/liankamene8-hash/https-www-kisumuhomesfinder.com" target="_blank" rel="noopener">
+            GitHub
+        </a>
+
+    </div>
+
+    <div class="copyright">
+        © 2026 KisumuHomes. All rights reserved.
+    </div>
+
+</footer>
+
+
+<script src="script.js"></script>
+
+<div id="propertyModal"></div>
+
+</body>
+</html>
+```

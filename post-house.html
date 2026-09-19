@@ -1,0 +1,874 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Post Your House | KisumuHomes</title>
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+</head>
+
+
+<body>
+
+
+<!-- ================= NAVBAR ================= -->
+
+<header class="navbar">
+
+    <div class="logo">
+
+        <span>🏠</span>
+
+        Kisumu<span>Homes</span>
+
+    </div>
+
+
+    <nav id="navMenu">
+
+        <a href="index.html">
+            Home
+        </a>
+
+        <a href="houses.html">
+            Find Houses
+        </a>
+
+        <a href="index.html#locations">
+            Locations
+        </a>
+
+        <a href="index.html#about">
+            About
+        </a>
+
+    </nav>
+
+
+    <div class="nav-buttons">
+
+        <button
+            class="login-btn"
+            onclick="showLoginMessage()"
+        >
+            Login
+        </button>
+
+        <a
+            href="post-house.html"
+            class="post-btn"
+        >
+            + Post House
+        </a>
+
+    </div>
+
+
+    <button
+        class="menu-btn"
+        onclick="toggleMenu()"
+    >
+        ☰
+    </button>
+
+</header>
+
+
+
+<!-- ================= PAGE HEADER ================= -->
+
+<section class="post-page-header">
+
+    <div>
+
+        <p class="section-label">
+            LIST YOUR PROPERTY
+        </p>
+
+        <h1>
+            Post your house
+        </h1>
+
+        <p>
+            Reach people looking for houses
+            in Kisumu.
+        </p>
+
+    </div>
+
+</section>
+
+
+
+<!-- ================= POST FORM ================= -->
+
+<main class="post-container">
+
+
+    <form
+        id="houseForm"
+        class="house-form"
+    >
+
+
+        <!-- ================= PROPERTY INFORMATION ================= -->
+
+        <div class="form-section">
+
+            <div class="form-section-heading">
+
+                <span class="form-number">
+                    01
+                </span>
+
+                <div>
+
+                    <h2>
+                        Property information
+                    </h2>
+
+                    <p>
+                        Tell people about the house
+                        you are listing.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="form-grid">
+
+
+                <!-- TITLE -->
+
+                <div class="form-group full">
+
+                    <label>
+                        Property title *
+                    </label>
+
+                    <input
+                        type="text"
+                        id="propertyTitle"
+                        placeholder="e.g. Modern 2 Bedroom Apartment"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- LOCATION -->
+
+                <div class="form-group">
+
+                    <label>
+                        Location *
+                    </label>
+
+                    <select
+                        id="propertyLocation"
+                        required
+                    >
+
+                        <option value="">
+                            Select location
+                        </option>
+
+                        <option value="Milimani">
+                            Milimani
+                        </option>
+
+                        <option value="Mamboleo">
+                            Mamboleo
+                        </option>
+
+                        <option value="Nyamasaria">
+                            Nyamasaria
+                        </option>
+
+                        <option value="Kondele">
+                            Kondele
+                        </option>
+
+                        <option value="Manyatta">
+                            Manyatta
+                        </option>
+
+                        <option value="Nyalenda">
+                            Nyalenda
+                        </option>
+
+                        <option value="Lolwe">
+                            Lolwe
+                        </option>
+
+                        <option value="Riat Hills">
+                            Riat Hills
+                        </option>
+
+                        <option value="Other">
+                            Other
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- TYPE -->
+
+                <div class="form-group">
+
+                    <label>
+                        House type *
+                    </label>
+
+                    <select
+                        id="propertyType"
+                        required
+                    >
+
+                        <option value="">
+                            Select type
+                        </option>
+
+                        <option value="Single Room">
+                            Single Room
+                        </option>
+
+                        <option value="Bedsitter">
+                            Bedsitter
+                        </option>
+
+                        <option value="1 Bedroom">
+                            1 Bedroom
+                        </option>
+
+                        <option value="2 Bedroom">
+                            2 Bedroom
+                        </option>
+
+                        <option value="3 Bedroom">
+                            3 Bedroom
+                        </option>
+
+                        <option value="4 Bedroom">
+                            4 Bedroom
+                        </option>
+
+                        <option value="Maisonette">
+                            Maisonette
+                        </option>
+
+                        <option value="Apartment">
+                            Apartment
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- RENT -->
+
+                <div class="form-group">
+
+                    <label>
+                        Monthly rent (KSh) *
+                    </label>
+
+                    <input
+                        type="number"
+                        id="propertyPrice"
+                        placeholder="e.g. 15000"
+                        min="0"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- BEDROOMS -->
+
+                <div class="form-group">
+
+                    <label>
+                        Bedrooms
+                    </label>
+
+                    <select id="bedrooms">
+
+                        <option value="0">
+                            Not applicable
+                        </option>
+
+                        <option value="1">
+                            1 Bedroom
+                        </option>
+
+                        <option value="2">
+                            2 Bedrooms
+                        </option>
+
+                        <option value="3">
+                            3 Bedrooms
+                        </option>
+
+                        <option value="4">
+                            4 Bedrooms
+                        </option>
+
+                        <option value="5+">
+                            5+ Bedrooms
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- BATHROOMS -->
+
+                <div class="form-group">
+
+                    <label>
+                        Bathrooms
+                    </label>
+
+                    <select id="bathrooms">
+
+                        <option value="1">
+                            1 Bathroom
+                        </option>
+
+                        <option value="2">
+                            2 Bathrooms
+                        </option>
+
+                        <option value="3">
+                            3 Bathrooms
+                        </option>
+
+                        <option value="4+">
+                            4+ Bathrooms
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- DESCRIPTION -->
+
+                <div class="form-group full">
+
+                    <label>
+                        Property description *
+                    </label>
+
+                    <textarea
+                        id="propertyDescription"
+                        rows="6"
+                        placeholder="Describe the house, neighborhood, security, water, electricity, parking, nearby shops, schools, etc."
+                        required
+                    ></textarea>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- ================= AMENITIES ================= -->
+
+        <div class="form-section">
+
+            <div class="form-section-heading">
+
+                <span class="form-number">
+                    02
+                </span>
+
+                <div>
+
+                    <h2>
+                        Amenities
+                    </h2>
+
+                    <p>
+                        Select everything available
+                        at the property.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="amenities-grid">
+
+
+                <label class="amenity">
+
+                    <input
+                        type="checkbox"
+                        value="Parking"
+                        name="amenity"
+                    >
+
+                    <span>
+                        🅿️ Parking
+                    </span>
+
+                </label>
+
+
+                <label class="amenity">
+
+                    <input
+                        type="checkbox"
+                        value="Water"
+                        name="amenity"
+                    >
+
+                    <span>
+                        💧 Water
+                    </span>
+
+                </label>
+
+
+                <label class="amenity">
+
+                    <input
+                        type="checkbox"
+                        value="Security"
+                        name="amenity"
+                    >
+
+                    <span>
+                        🔐 Security
+                    </span>
+
+                </label>
+
+
+                <label class="amenity">
+
+                    <input
+                        type="checkbox"
+                        value="WiFi"
+                        name="amenity"
+                    >
+
+                    <span>
+                        📶 Wi-Fi
+                    </span>
+
+                </label>
+
+
+                <label class="amenity">
+
+                    <input
+                        type="checkbox"
+                        value="Electricity"
+                        name="amenity"
+                    >
+
+                    <span>
+                        ⚡ Electricity
+                    </span>
+
+                </label>
+
+
+                <label class="amenity">
+
+                    <input
+                        type="checkbox"
+                        value="Garden"
+                        name="amenity"
+                    >
+
+                    <span>
+                        🌳 Garden
+                    </span>
+
+                </label>
+
+
+                <label class="amenity">
+
+                    <input
+                        type="checkbox"
+                        value="Balcony"
+                        name="amenity"
+                    >
+
+                    <span>
+                        🏢 Balcony
+                    </span>
+
+                </label>
+
+
+                <label class="amenity">
+
+                    <input
+                        type="checkbox"
+                        value="Kitchen"
+                        name="amenity"
+                    >
+
+                    <span>
+                        🍳 Kitchen
+                    </span>
+
+                </label>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- ================= PHOTOS ================= -->
+
+        <div class="form-section">
+
+            <div class="form-section-heading">
+
+                <span class="form-number">
+                    03
+                </span>
+
+                <div>
+
+                    <h2>
+                        Property photos
+                    </h2>
+
+                    <p>
+                        Add photos to attract people
+                        looking for houses.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="photo-upload">
+
+                <div class="upload-icon">
+                    📷
+                </div>
+
+                <h3>
+                    Upload house photos
+                </h3>
+
+                <p>
+                    Choose up to 6 photos.
+                </p>
+
+                <label
+                    for="propertyPhotos"
+                    class="upload-button"
+                >
+                    Choose Photos
+                </label>
+
+                <input
+                    type="file"
+                    id="propertyPhotos"
+                    accept="image/*"
+                    multiple
+                    hidden
+                >
+
+            </div>
+
+
+            <div
+                id="photoPreview"
+                class="photo-preview"
+            ></div>
+
+        </div>
+
+
+
+        <!-- ================= CONTACT ================= -->
+
+        <div class="form-section">
+
+            <div class="form-section-heading">
+
+                <span class="form-number">
+                    04
+                </span>
+
+                <div>
+
+                    <h2>
+                        Contact information
+                    </h2>
+
+                    <p>
+                        How should interested tenants
+                        contact you?
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="form-grid">
+
+
+                <div class="form-group">
+
+                    <label>
+                        Your name *
+                    </label>
+
+                    <input
+                        type="text"
+                        id="ownerName"
+                        placeholder="e.g. John Otieno"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Phone number *
+                    </label>
+
+                    <input
+                        type="tel"
+                        id="ownerPhone"
+                        placeholder="+254..."
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        WhatsApp number
+                    </label>
+
+                    <input
+                        type="tel"
+                        id="ownerWhatsapp"
+                        placeholder="+254..."
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        I am
+                    </label>
+
+                    <select id="ownerType">
+
+                        <option value="Landlord">
+                            Landlord
+                        </option>
+
+                        <option value="Agent">
+                            Property Agent
+                        </option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- ================= SUBMIT ================= -->
+
+        <div class="form-submit">
+
+            <div>
+
+                <strong>
+                    Ready to publish?
+                </strong>
+
+                <p>
+                    Your listing will appear in your
+                    local browser after publishing.
+                </p>
+
+            </div>
+
+
+            <button
+                type="submit"
+                class="publish-button"
+            >
+                Publish House →
+            </button>
+
+        </div>
+
+
+    </form>
+
+</main>
+
+
+
+<!-- ================= SUCCESS MODAL ================= -->
+
+<div
+    id="successModal"
+    class="property-modal"
+>
+
+    <div class="success-box">
+
+        <div class="success-icon">
+            ✓
+        </div>
+
+        <h2>
+            House published!
+        </h2>
+
+        <p>
+            Your property has been added successfully.
+            You can now view it on the houses page.
+        </p>
+
+        <div class="success-actions">
+
+            <a
+                href="houses.html"
+                class="post-btn"
+            >
+                View Houses
+            </a>
+
+            <button
+                onclick="closeSuccess()"
+                class="secondary-button"
+            >
+                Post Another
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+    <div class="footer-logo">
+        🏠 KisumuHomes
+    </div>
+
+    <p>
+        Find your next home in Kisumu.
+    </p>
+
+    <div class="footer-contact">
+        <strong>Founded by Stephen</strong>
+        <a href="mailto:ongerastephene@gmail.com">
+            ongerastephene@gmail.com
+        </a>
+        <a href="tel:+254742636064">
+            Helpline: +254742636064
+        </a>
+    </div>
+
+    <div class="footer-links">
+
+        <a href="index.html">
+            Home
+        </a>
+
+        <a href="houses.html">
+            Find Houses
+        </a>
+
+        <a href="index.html#locations">
+            Locations
+        </a>
+
+        <a href="index.html#about">
+            About
+        </a>
+
+        <a href="https://github.com/liankamene8-hash/https-www-kisumuhomesfinder.com" target="_blank" rel="noopener">
+            GitHub
+        </a>
+
+    </div>
+
+    <div class="copyright">
+        © 2026 KisumuHomes. All rights reserved.
+    </div>
+
+</footer>
+
+
+<script src="script.js"></script>
+
+</body>
+</html>
+```
